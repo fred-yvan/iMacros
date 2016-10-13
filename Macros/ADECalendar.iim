@@ -1,0 +1,37 @@
+﻿VERSION BUILD=8970419 RECORDER=FX
+TAB T=1
+' Les trois lignes qui suivent sont pour supprimer les coockies
+URL GOTO=http://www.google.fr
+TAB CLOSEALLOTHERS
+CLEAR
+WAIT SECONDS=5
+URL GOTO=https://www.emploisdutemps.uha.fr
+WAIT SECONDS=5
+EVENT TYPE=CLICK SELECTOR=[name=submit] BUTTON=0
+WAIT SECONDS=5
+' Selectionne le projet FST* qui est FST 2016-2017, FST 2017-2018, etc. 
+' TAG POS=1 TYPE=SELECT FORM=NAME:projects ATTR=NAME:projectId CONTENT=$FST*
+' --------------------------------------------
+SET !DATASOURCE CurrentChoice.csv
+SET !DATASOURCE_LINE 1 
+TAG POS=1 TYPE=SELECT FORM=NAME:projects ATTR=NAME:projectId CONTENT=${{!COL1}}*
+TAG POS=1 TYPE=INPUT:IMAGE FORM=NAME:projects ATTR=SRC:https://www.emploisdutemps.uha.fr//ade/button?text=Ok&red=false&cssClass=okbutton
+WAIT SECONDS=5
+FRAME NAME="participants"
+' Emploi du temps pour la personne Maillot
+EVENTS TYPE=KEYPRESS SELECTOR=[type=text] CHARS="Maillot"
+EVENT TYPE=KEYPRESS SELECTOR=[type=text] KEY=13
+WAIT SECONDS=5
+FRAME NAME="login"
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV:nth-of-type(2)>A:nth-of-type(4)>IMG" BUTTON=0
+TAB T=2
+WAIT SECONDS=5
+URL GOTO=https://www.emploisdutemps.uha.fr/ade/custom/modules/plannings/icalDates.jsp?
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV>INPUT:nth-of-type(3)" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV>INPUT:nth-of-type(3)" KEYS="[46,46,46,46]"
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV>INPUT:nth-of-type(3)" CHARS="2015"
+EVENT TYPE=CLICK SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(3)>INPUT:nth-of-type(3)" BUTTON=0
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(3)>INPUT:nth-of-type(3)" KEYS="[46,46,46,46]"
+EVENTS TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(3)>INPUT:nth-of-type(3)" CHARS="2018"
+EVENT TYPE=KEYPRESS SELECTOR="HTML>BODY>DIV>DIV>FORM>DIV:nth-of-type(2)>DIV:nth-of-type(3)>INPUT:nth-of-type(3)" KEY=13
+
