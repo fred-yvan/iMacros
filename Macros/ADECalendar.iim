@@ -12,7 +12,7 @@ WAIT SECONDS=5
 ' Selectionne le projet FST* qui est FST 2016-2017, FST 2017-2018, etc. 
 ' TAG POS=1 TYPE=SELECT FORM=NAME:projects ATTR=NAME:projectId CONTENT=$FST*
 ' --------------------------------------------
-SET !DATASOURCE CurrentChoice.csv
+SET !DATASOURCE CurrentUfr.csv
 SET !DATASOURCE_LINE 1 
 TAG POS=1 TYPE=SELECT FORM=NAME:projects ATTR=NAME:projectId CONTENT=${{!COL1}}*
 TAG POS=1 TYPE=INPUT:IMAGE FORM=NAME:projects ATTR=SRC:https://www.emploisdutemps.uha.fr//ade/button?text=Ok&red=false&cssClass=okbutton
