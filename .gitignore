@@ -1,5 +1,4 @@
 gm
-Datasources/Choices.csv
-Datasources/CurrentChoice.csv
+Datasources/*.csv
 Macros/Demo-Firefox/
 Macros/#Current.iim
