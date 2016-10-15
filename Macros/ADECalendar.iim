@@ -9,17 +9,21 @@ URL GOTO=https://www.emploisdutemps.uha.fr
 WAIT SECONDS=5
 EVENT TYPE=CLICK SELECTOR=[name=submit] BUTTON=0
 WAIT SECONDS=5
-' Selectionne le projet FST* qui est FST 2016-2017, FST 2017-2018, etc. 
-' TAG POS=1 TYPE=SELECT FORM=NAME:projects ATTR=NAME:projectId CONTENT=$FST*
-' --------------------------------------------
-SET !DATASOURCE CurrentUfr.csv
+' Définit le fichier source qui permet de passer des données à iMacro 
+SET !DATASOURCE CurrentChoice.csv
+' Pour l'instant ce fichier ne contient qu'une ligne 
+' Sur la première colonne : le nom de l'UFR dont on veut l'emploi du temps
+' Sur la deuxième colonne : le nom de l'enseignant dont on veut l'emploi du temps 
 SET !DATASOURCE_LINE 1 
+
+' Selectionne le projet 
+' --------------------------------------------
 TAG POS=1 TYPE=SELECT FORM=NAME:projects ATTR=NAME:projectId CONTENT=${{!COL1}}*
 TAG POS=1 TYPE=INPUT:IMAGE FORM=NAME:projects ATTR=SRC:https://www.emploisdutemps.uha.fr//ade/button?text=Ok&red=false&cssClass=okbutton
 WAIT SECONDS=5
 FRAME NAME="participants"
-' Emploi du temps pour la personne Maillot
-EVENTS TYPE=KEYPRESS SELECTOR=[type=text] CHARS="Maillot"
+' Emploi du temps pour la personne définie en colonne 2 de la ligne 1 du fichier CurrentChoice.csv
+EVENTS TYPE=KEYPRESS SELECTOR=[type=text] CHARS="{{!COL2}}"
 EVENT TYPE=KEYPRESS SELECTOR=[type=text] KEY=13
 WAIT SECONDS=5
 FRAME NAME="login"
